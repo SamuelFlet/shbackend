@@ -1,0 +1,31 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "cockroachdb"
+  url      = env("DATABASE_URL")
+}
+
+model Headphone {
+  id          String   @id @default(uuid())
+  name        String
+  description String
+  impedance   Int      @default(0)
+  frequency   String   @default("0 Hz - 0 KHz")
+  sensitivity Int      @default(0)
+  reviews     Review[]
+}
+
+model Review {
+  id        String    @id @default(uuid())
+  headphone Headphone @relation(fields: [hid], references: [id])
+  hid       String
+  title     String
+  review    String
+  date      DateTime  @default(now())
+  rating    Int       @default(0)
+}
