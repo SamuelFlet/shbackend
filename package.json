@@ -8,7 +8,7 @@
     "generate": "ts-node --transpile-only src/schema",
     "build": "tsc",
     "dev": "ts-node-dev src/index.ts",
-    "start": "node dist/src/index.js"
+    "start": "tsc && node dist/src/index.js"
   },
   "keywords": [],
   "author": "",
